@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refri RanGel | 16 Anos de Excelência</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Base e Root */
+        :root { --cyan: #01d4ff; --gray: #888; --white: #ffffff; }
+        
+        /* LOADER PREMIUM COM IMAGEM DE FUNDO */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #01080e;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .loader-bg {
+            position: absolute;
+            inset: 0;
+            /* Substitua 'img-empresa-bg.jpg' pelo caminho da sua foto da fábrica/sede */
+            background: url('Video.mp4') center/cover no-repeat;
+            filter: brightness(0.4) contrast(1.1); /* Brilho ajustado para equilíbrio profissional */
+            transform: scale(1.15);
+            animation: bgZoomOut 4s ease-out forwards;
+            z-index: -1;
+        }
+
+        @keyframes bgZoomOut {
+            to { transform: scale(1); }
+        }
+
+        .loader-content { 
+            text-align: center; 
+            width: 100%; 
+            max-width: 450px; 
+            padding: 20px; 
+            position: relative; 
+            z-index: 10; 
+        }
+
+        .logo-load { 
+            font-size: 3.5rem; 
+            font-weight: 900; 
+            letter-spacing: -2px; 
+            margin-bottom: 5px; 
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .logo-load span { color: var(--cyan); }
+
+        .progress-bar { 
+            width: 100%; 
+            height: 3px; 
+            background: rgba(255,255,255,0.1); 
+            border-radius: 10px; 
+            overflow: hidden; 
+            margin: 25px 0;
+        }
+
+        .progress-fill { 
+            width: 0%; 
+            height: 100%; 
+            background: var(--cyan); 
+            box-shadow: 0 0 20px var(--cyan);
+            animation: fillProgress 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; 
+        }
+
+        @keyframes fillProgress { to { width: 100%; } }
+
+        .loader-footer-text {
+            font-size: 0.85rem; 
+            letter-spacing: 5px; 
+            font-weight: 900; 
+            color: var(--white);
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInText 1s ease forwards 0.8s;
+        }
+
+        @keyframes fadeInText { to { opacity: 1; } }
+
+        /* Estilos Originais Mantidos */
+        .testimonials-wrapper { overflow: hidden; padding: 40px 0; position: relative; }
+        .testimonials-track { display: flex; gap: 30px; animation: scroll 40s linear infinite; width: max-content; }
+        .testimonials-track:hover { animation-play-state: paused; }
+        .comment-card { background: #0a0a0a; border: 1px solid rgba(1, 212, 255, 0.1); padding: 35px; border-radius: 20px; min-width: 380px; max-width: 380px; transition: 0.3s ease; }
+        .comment-card:hover { border-color: var(--cyan); transform: translateY(-5px); background: #0f0f0f; }
+        .stars { color: #FFD700; margin-bottom: 15px; font-size: 0.9rem; letter-spacing: 2px; }
+        .quote { font-style: italic; color: #ddd; line-height: 1.6; margin-bottom: 25px; font-size: 0.95rem; }
+        .client-info { display: flex; align-items: center; gap: 15px; }
+        .client-line { width: 30px; height: 2px; background: var(--cyan); }
+        .client-name { display: block; color: white; font-weight: 700; font-size: 0.9rem; }
+        .client-status { font-size: 0.7rem; color: var(--cyan); text-transform: uppercase; letter-spacing: 1px; font-weight: 800; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-380px * 3 - 30px * 3)); } }
+
+        .production-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .banner-item { background: #0a0a0a; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); transition: 0.4s ease; position: relative; }
+        .banner-item:hover { transform: translateY(-10px); border-color: var(--cyan); box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+        .img-container { position: relative; overflow: hidden; height: 280px; }
+        .banner-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+        .banner-item:hover img { transform: scale(1.1); }
+        .banner-content { padding: 30px; background: linear-gradient(to bottom, transparent, #0a0a0a); }
+        .tech-list { list-style: none; padding: 0; margin-top: 15px; }
+        .tech-list li { font-size: 0.85rem; color: #aaa; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .tech-list li::before { content: '✓'; color: var(--cyan); font-weight: bold; }
+
+        .founder-wrap {
+            background: linear-gradient(145deg, #050a0f 0%, #01080e 100%);
+            border-radius: 30px; padding: 80px 50px; margin: 100px 0;
+            border: 1px solid rgba(1, 212, 255, 0.1); display: flex; align-items: center; gap: 60px;
+            position: relative; overflow: hidden;
+        }
+        .founder-wrap::before {
+            content: "RANGEL"; position: absolute; right: -50px; bottom: -20px;
+            font-size: 10rem; font-weight: 900; color: rgba(1, 212, 255, 0.03); z-index: 0;
+        }
+        .founder-img-box { flex: 1; position: relative; min-width: 380px; z-index: 1; }
+        .founder-img-box img {
+            width: 100%; border-radius: 20px; filter: grayscale(20%);
+            border: 1px solid rgba(255,255,255,0.1); box-shadow: 20px 20px 0px rgba(1, 212, 255, 0.1); transition: 0.5s ease;
+        }
+        .founder-img-box:hover img { filter: grayscale(0%); box-shadow: 10px 10px 0px var(--cyan); }
+        .founder-text { flex: 1.5; z-index: 1; }
+        .founder-text h2 { font-size: 3rem; margin: 20px 0; line-height: 1.1; font-weight: 900; }
+        .founder-bio { color: #bbb; font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px; }
+        .founder-signature { border-left: 3px solid var(--cyan); padding-left: 20px; }
+        .founder-name { display: block; font-size: 1.4rem; font-weight: 900; color: #fff; }
+        .founder-pos { font-size: 0.8rem; color: var(--cyan); text-transform: uppercase; letter-spacing: 3px; }
+
+        @media (max-width: 968px) {
+            .founder-wrap { flex-direction: column; text-align: center; padding: 40px 20px; }
+            .founder-img-box { min-width: 100%; }
+            .founder-signature { border-left: none; padding-left: 0; }
+        }
+    </style>
+</head>
+<body style="background: #01080e; color: white;">
+    
+    <a href="https://wa.me/5511999999999" class="whatsapp-float" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+
+    <div id="loader">
+        <div class="loader-bg"></div>
+        <div class="loader-content">
+            <h1 class="logo-load">REFRI<span>RANGEL</span></h1>
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <p class="loader-footer-text">EXCELÊNCIA EM CADA DETALHE</p>
+        </div>
+    </div>
+
+    <header>
+        <nav class="container">
+            <div class="logo">REFRI<span>RANGEL</span></div>
+            <div class="nav-links">
+                <a href="produtos.html" class="link-p">Produtos</a>
+                <a href="https://www.instagram.com/refrirangelbalcoes" target="_blank" class="btn-nav">Instagram</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+    <div class="hero-glow"></div> <div class="container">
+        <div class="hero-content">
+            <span class="tag">
+                <i class="dot"></i> REFERÊNCIA NACIONAL EM INOX
+            </span>
+            <h1>Onde a Estética Encontra<br><span class="text-gradient">a Força Industrial</span></h1>
+            <p>Fabricação exclusiva de equipamentos em Aço Inox 304 com tecnologia de refrigeração inteligente e acabamento artesanal de alto padrão.</p>
+            
+            <div class="hero-actions">
+                <a href="produtos.html" class="btn-primary">
+                    EXPLORAR CATÁLOGO
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <div class="hero-stats">
+                    <div><strong>+15 ANOS</strong><span>No Mercado</span></div>
+                    <div class="divider"></div>
+                    <div><strong>100%</strong><span>Garantido</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <section id="producao-detalhe" class="container section-padding">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <span class="tag">NOSSO PROCESSO</span>
+                <h2 style="font-size: 3rem; font-weight: 900; margin-top: 10px;">Engenharia de Precisão</h2>
+                <p style="color: var(--gray); max-width: 600px; margin: 15px auto;">Cada equipamento é tratado como uma peça única, unindo a força do aço com o acabamento artesanal.</p>
+            </div>
+            
+            <div class="production-gallery">
+                <div class="banner-item">
+                    <div class="img-container"><img src="img09 testebalcao (17).jpeg" alt="Serralheria Fina"></div>
+                    <div class="banner-content">
+                        <h4 style="color: var(--cyan);">Serralheria Fina</h4>
+                        <p style="font-size: 0.95rem; color: #ddd;">Inox certificado moldado com precisão milimétrica.</p>
+                        <ul class="tech-list">
+                            <li>Cortes a laser de alta definição</li>
+                            <li>Dobras estruturais reforçadas</li>
+                            <li>Polimento espelhado premium</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="banner-item">
+                    <div class="img-container"><img src="img09 teste espuma (16).jpeg" alt="Isolamento Térmico"></div>
+                    <div class="banner-content">
+                        <h4 style="color: var(--cyan);">Isolamento Térmico</h4>
+                        <p style="font-size: 0.95rem; color: #ddd;">Estabilidade térmica total e economia de energia.</p>
+                        <ul class="tech-list">
+                            <li>Injeção de Poliuretano A+</li>
+                            <li>Vedação hermética total</li>
+                            <li>Performance em climas extremos</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="banner-item">
+                    <div class="img-container"><img src="img09 teste final (11).jpeg" alt="Qualidade Rigorosa"></div>
+                    <div class="banner-content">
+                        <h4 style="color: var(--cyan);">Controle de Qualidade</h4>
+                        <p style="font-size: 0.95rem; color: #ddd;">Nenhum detalhe escapa dos nossos testes rigorosos.</p>
+                        <ul class="tech-list">
+                            <li>Testes de estanqueidade 48h</li>
+                            <li>Calibração digital de precisão</li>
+                            <li>Checklist final de 50 pontos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sede-card" style="margin-top: 80px; display: flex; flex-wrap: wrap; background: #0a0a0a; border-radius: 25px; overflow: hidden; border: 1px solid #222;">
+                <div style="flex: 1; min-width: 300px;"><img src="img09 emnpresa (18).jpeg" style="width:100%; height:100%; min-height: 350px; object-fit: cover;"></div>
+                <div style="flex: 1; padding: 60px; min-width: 300px; display:flex; flex-direction:column; justify-content:center;">
+                    <span style="color: var(--cyan); font-weight: bold; font-size: 0.8rem;">NOSSA FÁBRICA</span>
+                    <h3 style="font-size: 2.5rem; margin: 15px 0;">Sede Própria Industrial</h3>
+                    <p style="color: #bbb; margin-bottom: 25px;">📍 Av. Mal. Rondon, 1104 - Salto/SP</p>
+                    <a href="https://maps.google.com" target="_blank" class="btn-nav" style="text-align:center;">Abrir no Google Maps</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="founder-wrap">
+                <div class="founder-img-box">
+                    <img src="img35dona2.jpeg" alt="Fundadora Refri RanGel">
+                </div>
+                <div class="founder-text">
+                    <span class="tag">NOSSA HISTÓRIA</span>
+                    <h2>Liderança que<br><span style="color: var(--cyan);">Transforma o Aço.</span></h2>
+                    <div class="founder-bio">
+                        <p>Há mais de 16 anos, a <strong>Refri RanGel</strong> nasceu sob a visão de uma mulher determinada a elevar o padrão da refrigeração comercial no Brasil. O que começou como um desafio, hoje é referência nacional.</p>
+                        <p>Sua filosofia é inegociável: "Não entregamos apenas balcões, entregamos o coração da operação dos nossos clientes".</p>
+                    </div>
+                    <div class="founder-signature">
+                        <span class="founder-name">Dona RanGel</span>
+                        <span class="founder-pos">CEO & Fundadora</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials section-padding">
+            <div class="container">
+                <div class="testimonials-wrapper">
+                    <div class="testimonials-track">
+                        <div class="comment-card"><div class="stars">★★★★★</div><p class="quote">"O acabamento em inox é de outro nível."</p><div class="client-info"><div class="client-line"></div><div><span class="client-name">Padarias Milão</span><span class="client-status">Verificado</span></div></div></div>
+                        <div class="comment-card"><div class="stars">★★★★★</div><p class="quote">"Precisão na temperatura."</p><div class="client-info"><div class="client-line"></div><div><span class="client-name">Empório Santa Luzia</span><span class="client-status">Verificado</span></div></div></div>
+                        <div class="comment-card"><div class="stars">★★★★★</div><p class="quote">"Equipamentos robustos."</p><div class="client-info"><div class="client-line"></div><div><span class="client-name">Posto América</span><span class="client-status">Verificado</span></div></div></div>
+                        <div class="comment-card"><div class="stars">★★★★★</div><p class="quote">"O acabamento em inox é de outro nível."</p><div class="client-info"><div class="client-line"></div><div><span class="client-name">Padarias Milão</span><span class="client-status">Verificado</span></div></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="container section-padding" style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div class="logo">REFRI<span>RANGEL</span></div>
+        <p>© 2026 Refri RanGel - Salto/SP</p>
+    </footer>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 800);
+            }, 2800);
+        });
+    </script>
+</body>
+</html>

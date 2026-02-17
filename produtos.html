@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio Premium | Refri RanGel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root { --cyan: #01d4ff; }
+        body { background: #01080e; color: white; font-family: 'Inter', sans-serif; margin: 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Banner Campeão de Vendas Atualizado */
+        .best-seller-banner {
+            display: flex;
+            align-items: center;
+            background: #0a0a0a;
+            border: 1px solid var(--cyan);
+            border-radius: 20px;
+            margin: 40px 0;
+            padding: 30px;
+            gap: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        .banner-content { flex: 1.2; }
+        .banner-badge { 
+            background: var(--cyan); 
+            color: #000; 
+            padding: 5px 15px; 
+            border-radius: 50px; 
+            font-size: 0.7rem; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+        }
+        .banner-content h2 { font-size: 2.2rem; margin: 15px 0 10px; font-weight: 900; }
+        .banner-content p { color: #888; margin-bottom: 20px; font-size: 1rem; line-height: 1.5; }
+        
+        .banner-img-box { flex: 1; text-align: right; display: flex; justify-content: center; }
+        .banner-img-box img { 
+            max-width: 100%; 
+            max-height: 350px; /* Tamanho médio ideal */
+            border-radius: 15px; 
+            box-shadow: 0 0 30px rgba(1, 212, 255, 0.2); 
+            object-fit: contain;
+        }
+
+        /* Estilo da Grid */
+        .gallery-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 25px; 
+            padding: 40px 0; 
+        }
+
+        .product-card { 
+            background: #0a0a0a; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.05); 
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover { 
+            border-color: var(--cyan); 
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        /* Container da Imagem */
+        .img-container {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .product-img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.8s ease;
+            filter: brightness(0.8);
+        }
+
+        .product-card:hover .product-img { 
+            transform: scale(1.1); 
+            filter: brightness(1);
+        }
+
+        /* Banner de Rodapé do Card (Interno) */
+        .card-banner {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 20px;
+        }
+
+        .card-banner h3 { margin: 0; font-size: 1.1rem; font-weight: 700; color: #fff; }
+
+        /* BOTÃO DE ORÇAMENTO */
+        .btn-orcamento {
+            display: block;
+            text-align: center;
+            background: rgba(255,255,255,0.03);
+            color: var(--cyan);
+            text-decoration: none;
+            padding: 15px;
+            font-weight: 900;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+
+        .product-card:hover .btn-orcamento {
+            background: var(--cyan);
+            color: #000;
+        }
+
+        /* Lightbox */
+        #lightbox { 
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); 
+            z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(10px);
+            flex-direction: column;
+        }
+        #lightbox img { max-width: 90%; max-height: 75vh; border-radius: 15px; transition: opacity 0.3s; }
+        .close-btn { position: absolute; top: 30px; right: 40px; font-size: 40px; color: #fff; cursor: pointer; }
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); font-size: 40px; color: var(--cyan); cursor: pointer; padding: 20px; user-select: none; }
+        #lightbox-caption { color: var(--cyan); margin-top: 20px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
+
+        /* Estilo do Título com Gradiente */
+        .header-title { text-align: center; padding: 60px 0 20px; }
+        .header-title h1 {
+            font-size: 3.5rem; 
+            font-weight: 900; 
+            letter-spacing: -2px; 
+            margin: 0;
+            background: linear-gradient(to bottom, #ffffff, #666666);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Footer Custom */
+        footer { margin-top: 100px; padding: 80px 0 40px; background: linear-gradient(to top, #050a0f, transparent); border-top: 1px solid rgba(1, 212, 255, 0.1); text-align: center; }
+        .cta-box h2 { font-size: 2.5rem; font-weight: 900; margin: 10px 0; }
+        .btn-final { display: inline-block; background: var(--cyan); color: #000; padding: 18px 45px; border-radius: 50px; font-weight: 900; text-decoration: none; margin-top: 25px; transition: 0.3s; }
+        .btn-final:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(1, 212, 255, 0.3); }
+
+        @media (max-width: 768px) {
+            .best-seller-banner { flex-direction: column-reverse; text-align: center; }
+            .banner-img-box img { max-height: 250px; }
+            .header-title h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0;">
+            <div style="font-weight: 900; font-size: 1.5rem;">REFRI<span style="color: var(--cyan);">RANGEL</span></div>
+            <a href="index.html" style="color: white; text-decoration: none; border: 1px solid rgba(255,255,255,0.2); padding: 8px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 700;">VOLTAR AO INÍCIO</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="header-title">
+            <p style="color: var(--cyan); letter-spacing: 4px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase;">Excelência Industrial</p>
+            <h1>Portfólio de Produtos</h1>
+        </div>
+
+        <div class="best-seller-banner">
+            <div class="banner-content">
+                <span class="banner-badge">🏆 Campeão de Vendas</span>
+                <h2>Balcão POP</h2>
+                <p>Conheça o nosso campeão de vendas! O Balcão POP combina eficiência e modernidade para o seu comércio.</p>
+                <a href="https://wa.me/5511999999999?text=Olá! Gostaria de um orçamento para o Balcão POP, o campeão de vendas." class="btn-orcamento" style="display: inline-block; border: none; padding: 15px 30px; border-radius: 50px; background: var(--cyan); color: #000;">SOLICITAR AGORA</a>
+            </div>
+            <div class="banner-img-box">
+                <img src="img26dona.jpeg" alt="Balcão POP Campeão de Vendas">
+            </div>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="product-card"><div class="img-container"><img src="img09 (1).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 01</h3></div></div><a href="https://wa.me/5511999999999?text=Olá! Vi o Projeto 01 no portfólio e gostaria de um orçamento." class="btn-orcamento" target="_blank">SOLICITAR ORÇAMENTO</a></div>
+            <div class="product-card"><div class="img-container"><img src="img09 (2).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 02</h3></div></div><a href="https://wa.me/5511999999999?text=Olá! Vi o Projeto 02 no portfólio e gostaria de um orçamento." class="btn-orcamento" target="_blank">SOLICITAR ORÇAMENTO</a></div>
+            <div class="product-card"><div class="img-container"><img src="img09 (3).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 03</h3></div></div><a href="https://wa.me/5511999999999?text=Olá! Vi o Projeto 03 no portfólio e gostaria de um orçamento." class="btn-orcamento" target="_blank">SOLICITAR ORÇAMENTO</a></div>
+            <div class="product-card"><div class="img-container"><img src="img09 (4).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 04</h3></div></div><a href="https://wa.me/5511999999999?text=Olá! Vi o Projeto 04 no portfólio e gostaria de um orçamento." class="btn-orcamento" target="_blank">SOLICITAR ORÇAMENTO</a></div>
+            <div class="product-card"><div class="img-container"><img src="img09 (5).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 05</h3></div></div><a href="https://wa.me/5511999999999?text=Olá! Vi o Projeto 05 no portfólio e gostaria de um orçamento." class="btn-orcamento" target="_blank">SOLICITAR ORÇAMENTO</a></div>
+            <div class="product-card"><div class="img-container"><img src="img09 (6).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 06</h3></div></div><a href="https://wa.me/5511999999998?text=Olá! Vi o Projeto 06 no portfólio e gostaria de um orçamento." class="btn-orcamento" target="_blank">SOLICITAR ORÇAMENTO</a></div>
+            
+            <div class="product-card"><div class="img-container"><img src="img09 (7).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 07</h3></div></div><a href="#" onclick='alert("Este projeto ainda não está disponível para orçamentos.")' class="btn-orcamento">SOLICITAR ORÇAMENTO</a></div>
+            
+            <div class="product-card"><div class="img-container"><img src="img09 (8).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 08</h3></div></div><a href="https://wa.me/5511999999999?text=Olá! Vi o Projeto 08 no portfólio e gostaria de um orçamento." class="btn-orcamento" target="_blank">SOLICITAR ORÇAMENTO</a></div>
+            <div class="product-card"><div class="img-container"><img src="img09 (9).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 09</h3></div></div><a href="https://wa.me/5511999999999?text=Olá! Vi o Projeto 09 no portfólio e gostaria de um orçamento." class="btn-orcamento" target="_blank">SOLICITAR ORÇAMENTO</a></div>
+            <div class="product-card"><div class="img-container"><img src="img09 (10).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 10</h3></div></div><a href="https://wa.me/5511999999999?text=Olá! Vi o Projeto 10 no portfólio e gostaria de um orçamento." class="btn-orcamento" target="_blank">SOLICITAR ORÇAMENTO</a></div>
+            <div class="product-card"><div class="img-container"><img src="img09 (13).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 11</h3></div></div><a href="https://wa.me/5511999999998?text=Olá! Vi o Projeto 11 no portfólio e gostaria de um orçamento." class="btn-orcamento" target="_blank">SOLICITAR ORÇAMENTO</a></div>
+            <div class="product-card"><div class="img-container"><img src="img09 (12).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 12</h3></div></div><a href="https://wa.me/5511999999998?text=Olá! Vi o Projeto 12 no portfólio e gostaria de um orçamento." class="btn-orcamento" target="_blank">SOLICITAR ORÇAMENTO</a></div>
+            
+            <div class="product-card"><div class="img-container"><img src="img09 (13).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 13</h3></div></div><a href="#" onclick='alert("Este projeto ainda não está disponível para orçamentos.")' class="btn-orcamento">SOLICITAR ORÇAMENTO</a></div>
+            
+            <div class="product-card"><div class="img-container"><img src="img09 (14).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 14</h3></div></div><a href="https://wa.me/5511999999999?text=Olá! Vi o Projeto 14 no portfólio e gostaria de um orçamento." class="btn-orcamento" target="_blank">SOLICITAR ORÇAMENTO</a></div>
+            <div class="product-card"><div class="img-container"><img src="img09 (15).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 15</h3></div></div><a href="https://wa.me/5511999999999?text=Olá! Vi o Projeto 15 no portfólio e gostaria de um orçamento." class="btn-orcamento" target="_blank">SOLICITAR ORÇAMENTO</a></div>
+            <div class="product-card"><div class="img-container"><img src="img09 (19).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 16</h3></div></div><a href="https://wa.me/5511999999999?text=Olá! Vi o Projeto 16 no portfólio e gostaria de um orçamento." class="btn-orcamento" target="_blank">SOLICITAR ORÇAMENTO</a></div>
+            <div class="product-card"><div class="img-container"><img src="img09 (20).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 17</h3></div></div><a href="https://wa.me/5511999999998?text=Olá! Vi o Projeto 17 no portfólio e gostaria de um orçamento." class="btn-orcamento" target="_blank">SOLICITAR ORÇAMENTO</a></div>
+            
+            <div class="product-card"><div class="img-container"><img src="img09 (21).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 18</h3></div></div><a href="#" onclick='alert("Este projeto ainda não está disponível para orçamentos.")' class="btn-orcamento">SOLICITAR ORÇAMENTO</a></div>
+            <div class="product-card"><div class="img-container"><img src="img09 (22).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 19</h3></div></div><a href="#" onclick='alert("Este projeto ainda não está disponível para orçamentos.")' class="btn-orcamento">SOLICITAR ORÇAMENTO</a></div>
+            <div class="product-card"><div class="img-container"><img src="img09 (23).jpeg" class="product-img"><div class="card-banner"><h3>Projeto 20</h3></div></div><a href="#" onclick='alert("Este projeto ainda não está disponível para orçamentos.")' class="btn-orcamento">SOLICITAR ORÇAMENTO</a></div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container cta-box">
+            <span style="color: var(--cyan); letter-spacing: 5px; font-size: 0.7rem; font-weight: 900;">CONTATO DIRETO</span>
+            <h2>Interessado em um desses <span style="color: var(--cyan);">projetos?</span></h2>
+            <p style="color: #888; max-width: 550px; margin: 15px auto;">Nossa equipe está pronta para projetar o balcão ideal para o seu estabelecimento com a durabilidade que só a Refri RanGel oferece.</p>
+            <a href="https://wa.me/5511999999999" class="btn-final" target="_blank">FALAR COM CONSULTOR</a>
+            
+            <div style="margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                <div style="font-weight: 900; font-size: 1.2rem;">REFRI<span style="color: var(--cyan);">RANGEL</span></div>
+                <p style="color: #555; font-size: 0.8rem;">© 2026 Salto/SP - Excelência em Refrigeração</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="lightbox">
+        <span class="close-btn">×</span>
+        <span class="nav-btn prev" style="left: 20px;">❮</span>
+        <img id="lightbox-img" src="">
+        <div id="lightbox-caption"></div>
+        <span class="nav-btn next" style="right: 20px;">❯</span>
+    </div>
+
+    <script>
+        const cards = document.querySelectorAll('.product-card');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCap = document.getElementById('lightbox-caption');
+        const closeBtn = document.querySelector('.close-btn');
+        const nextBtn = document.querySelector('.next');
+        const prevBtn = document.querySelector('.prev');
+        let currentIndex = 0;
+
+        cards.forEach((card, index) => {
+            const img = card.querySelector('.product-img');
+            img.addEventListener('click', () => { 
+                currentIndex = index; 
+                updateLightbox(); 
+                lightbox.style.display = 'flex'; 
+            });
+        });
+
+        function updateLightbox() { 
+            const currentImg = cards[currentIndex].querySelector('.product-img');
+            const currentTitle = cards[currentIndex].querySelector('h3').innerText;
+            
+            lightboxImg.style.opacity = '0';
+            setTimeout(() => {
+                lightboxImg.src = currentImg.src;
+                lightboxCap.innerText = currentTitle;
+                lightboxImg.style.opacity = '1';
+            }, 100);
+        }
+
+        nextBtn.addEventListener('click', (e) => { 
+            e.stopPropagation(); 
+            if (currentIndex < cards.length - 1) { currentIndex++; updateLightbox(); } 
+        });
+
+        prevBtn.addEventListener('click', (e) => { 
+            e.stopPropagation(); 
+            if (currentIndex > 0) { currentIndex--; updateLightbox(); } 
+        });
+
+        closeBtn.addEventListener('click', () => lightbox.style.display = 'none');
+        
+        lightbox.addEventListener('click', (e) => { 
+            if(e.target === lightbox) lightbox.style.display = 'none'; 
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.style.display === 'flex') {
+                if (e.key === 'Escape') lightbox.style.display = 'none';
+                if (e.key === 'ArrowRight') nextBtn.click();
+                if (e.key === 'ArrowLeft') prevBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
