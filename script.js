@@ -26,4 +26,11 @@ window.addEventListener('scroll', () => {
     setTimeout(() => {
         loader.classList.add('loader-finish');
     }, 2500); // Tempo da animação da barra
+
+}); document.addEventListener('keydown', (e) => {
+    // Se o usuário estiver digitando, não faz nada
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+    if (e.key === 'ArrowLeft' && prevBtn) prevBtn.click();
+    if (e.key === 'ArrowRight' && nextBtn) nextBtn.click();
 });
